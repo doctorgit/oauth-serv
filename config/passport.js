@@ -7,7 +7,7 @@ const User = require('../models/user');
 
 module.exports = (passport) => {
     passport.use(
-        new LocalStrategy({ userField: 'email' }, (email, password, done) => {
+        new LocalStrategy({ usernameField: 'email' }, (email, password, done) => {
             // Match user
             User.findOne({ email })
                 .then((user) => {
@@ -29,8 +29,6 @@ module.exports = (passport) => {
 
     passport.serializeUser((user, done) => done(null, user.id));
 
-    passport.deserializeUser((id, done) => {
-        console.log(User, done);
-        User.findById(id, done); // Calls dane as callback with error and user arguments
-    });
+    // Calls dane as callback with error and user arguments
+    passport.deserializeUser((id, done) => User.findById(id, done));
 };

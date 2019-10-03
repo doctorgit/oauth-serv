@@ -66,7 +66,6 @@ router.post('/register', (req, res) => {
 // Login Handle
 
 router.post('/login', (request, response, next) => {
-    console.log(request);
      passport.authenticate('local', {
          successRedirect: '/dashboard',
          failureRedirect: '/users/login',
