@@ -2,6 +2,13 @@ const express = require('express');
 
 const router = express.Router();
 
-router.get('/', (req, res) => res.render('welcome'));
+// Login
+router.get('/',  (req, res) => res.send('welcome'));
 
-module.exports = router;
+module.exports = [
+    ['/', router],
+    ['/api/auth', require('./api/auth')],
+    ['/login', require('./login')],
+    ['/register', require('./register')],
+
+];

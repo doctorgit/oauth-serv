@@ -1,0 +1,29 @@
+<html>
+<head>
+    <script>(
+        function(){
+            let mode = 0;
+            if (typeof window.opener != "undefined" && window.opener)
+                mode = 1; // new window
+            else if (typeof window.parent != "undefined" && window.parent)
+                mode = 2;
+
+            if (!mode) return;
+
+            let data = '<%= data %>';
+
+            let param = { token: `<%= data %>` };
+
+            let result = "loginauth:" + JSON.stringify(param);
+
+            if (mode == 1) {
+                window.opener.postMessage(result, "*");
+            } else if (mode == 2) {
+                window.parent.postMessage(result, "*");
+            }
+        }
+        )();
+    </script>
+</head>
+<body></body>
+</html>
